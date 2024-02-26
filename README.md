@@ -64,7 +64,7 @@ Docker Engine (v20.10.12+) must be installed to run RE. It is recommended to ins
 Once `docker` is successfully installed, run the following command to verify that a compatible version is installed:
 
 ```bash
-> docker version
+docker version
 ```
     
 <a name='docker-compose'></a>
@@ -78,7 +78,7 @@ Docker Compose (v2.2.3+) must be installed to run RE. It is recommended to insta
 Once `docker compose` is successfully installed, run the following command to verify that a compatible version is installed:
 
 ```bash
-> docker compose version
+docker compose version
 ```
     
 <a name='python'></a>
@@ -92,7 +92,7 @@ Python (v3.8.0+) must be installed to run RE. In some cases, running the most up
 Once `python` is successfully installed, run the following command to verify that a compatible version is installed:
 
 ```bash
-> python3 --version
+python3 --version
 ```
 
 <a name='getting-started'></a>
@@ -100,8 +100,10 @@ Once `python` is successfully installed, run the following command to verify tha
 ## Getting Started
 
 ```bash
-> git clone https://github.com/asmtlab/assessment-reporting-engine.git
-> cd assessment-reporting-engine
+git clone https://github.com/asmtlab/assessment-reporting-engine.git
+```
+```bash
+cd assessment-reporting-engine
 ```
 
 <a name='install-dependencies'></a>
@@ -115,10 +117,16 @@ A python3 script ptp.py is included to automate various functions, including the
 Any alternate versions of Node and NPM that may be running on the system where RE is being installed could conflict with RE set up. For that reason, it is recommended to purge any existing versions of Node and NPM if they are not needed. The following command will install Node and NPM:
 
 ```bash
-> curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
-> NODE_MAJOR=18
-> echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
-> apt-get update && apt-get install nodejs -y && apt-get install npm -y
+curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
+```
+```bash
+NODE_MAJOR=18
+```
+```bash
+echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
+```
+```bash
+apt-get update && apt-get install nodejs -y && apt-get install npm -y
 ```
 
 Reboot system after installation.
@@ -126,8 +134,10 @@ Reboot system after installation.
 Verify `node` and `npm` versions by running the following commands:
 
 ```bash
-> node --version
-> npm --version
+node --version
+```
+```bash
+npm --version
 ```
 
 #### Python3-Django v2.2.x
@@ -135,13 +145,13 @@ Verify `node` and `npm` versions by running the following commands:
 The following command will install Python3-Django:
 
 ```bash
-> apt install python3-django
+apt install python3-django
 ```
 
 Verify `python3-django` version by running the following command:
 
 ```bash
-> python3 -m django --version
+python3 -m django --version
 ```
 
 #### TailwindCSS 3
@@ -149,7 +159,7 @@ Verify `python3-django` version by running the following command:
 The following command should be run from the root of the RE directory and will install TailwindCSS 3 dependencies (requires that a valid version of `npm` already be installed) - note that this installation is performed when the `python3 ptp.py setup` command is run.
 
 ```bash
-> npm install -D node/dependencies/tailwindcss-3 --legacy-peer-deps
+npm install -D node/dependencies/tailwindcss-3 --legacy-peer-deps
 ```
 
 #### Vue.js 3
@@ -157,7 +167,7 @@ The following command should be run from the root of the RE directory and will i
 The following command should be run from the root of the RE directory and will install Vue.js 3 dependencies (requires that a valid version of `npm` already be installed) - note that this installation is performed when the `python3 ptp.py setup` command is run.
 
 ```bash
-> npm install -D node/dependencies/components-vue3 --legacy-peer-deps
+npm install -D node/dependencies/components-vue3 --legacy-peer-deps
 ```
 
 <a name='setup-production'></a>
@@ -167,13 +177,13 @@ The following command should be run from the root of the RE directory and will i
 The following command can be run from the root of the RE directory to install the TailwindCSS 3 and Vue.js 3 dependencies (if this has not already been done manually per the last section):
 
 ```bash
-> python3 ptp.py setup
+python3 ptp.py setup
 ```
 
 Once all prerequisites and dependencies are met, an instance of RE can be spun up by running the following command (be sure to specify the correct assessment type with the `-r` flag):
 
 ```bash
-> python3 ptp.py run -r [FAST/RPT/RVA]
+python3 ptp.py run -r [FAST/RPT/RVA]
 ```
 
 The default assessment type of the application is set to **RVA** in cases where an assessment type is not specified.
@@ -197,7 +207,7 @@ Superusers can access the admin interface by logging in and selecting their user
 A back up ZIP file can be downloaded through the GUI by logging in and navigating to the **Export** page. The required Assessment Details fields must already be completed since the password set on that form is what is used to encrypt the ZIP file. Alternatively, the following command can be run to generate a backup ZIP (user will be prompted to enter a password to encrypt the file):
 
 ```bash
-> python3 ptp.py backup
+python3 ptp.py backup
 ```
 
 <a name='restore-online'></a>
@@ -207,7 +217,7 @@ A back up ZIP file can be downloaded through the GUI by logging in and navigatin
 It is assumed that a copy of the assessment-reporting-engine directory (whether its backed up from the previous instance or a new copy) is on the system where RE is being restored. ***The version of RE must match the version the backup was generated from and the same assessment type from the previous instance must be specified with the `-r` flag.*** The following command will restore the RE instance from a backup ZIP file:
 
 ```bash
-> python3 ptp.py restore -r [FAST/RPT/RVA] -b [/path/to/backup.zip]
+python3 ptp.py restore -r [FAST/RPT/RVA] -b [/path/to/backup.zip]
 ```
 
 <a name='backup-offline'></a>
@@ -219,10 +229,16 @@ While the initial set up of RE involves internet connectivity, the application c
 This method involves a lot of overhead in terms of large files transferred between systems, so if internet connectivity is available on the system where RE is being restored, it is recommended to follow the [Back Up for Online Restore](#backup-online) and [Restore Online](#restore-online) steps:
 
 ```bash
-> python3 ptp.py backup
-> docker save prod-web > web.tar
-> docker save prod-nginx > nginx.tar
-> docker save prod-db > db.tar
+python3 ptp.py backup
+```
+```bash
+docker save prod-web > web.tar
+```
+```bash
+docker save prod-nginx > nginx.tar
+```
+```bash
+docker save prod-db > db.tar
 ```
 
 The ***entire assessment-reporting-engine directory***, including the web/nginx/db TAR files and the backup ZIP file must be transferred to the new system due to various dependencies and files that were generated with internet connectivity, and which cannot be re-generated in the offline environment. This will fulfill the **TailwindCSS** and **Vue.js** requirements, however, ***the system where RE is being restored must already meet all other prerequisites and dependency requirements***.
@@ -240,10 +256,16 @@ The ***entire assessment-reporting-engine directory***, including the web/nginx/
 Once the above requirements are met, the following commands can be run from the root of the transferred RE directory to restore the application:
 
 ```bash
-> docker load < web.tar
-> docker load < nginx.tar
-> docker load < db.tar
-> python3 ptp.py restore -r [FAST/RPT/RVA] -b [/path/to/backup.zip] -c offline
+docker load < web.tar
+```
+```bash
+docker load < nginx.tar
+```
+```bash
+docker load < db.tar
+```
+```bash
+python3 ptp.py restore -r [FAST/RPT/RVA] -b [/path/to/backup.zip] -c offline
 ```
 
 <a name='other-functions'></a>
@@ -257,7 +279,7 @@ Once the above requirements are met, the following commands can be run from the 
 During set up, you will automatically be prompted to create a superuser. Once the application is running, users on networked machines can create their accounts with the sign up button on the login screen or an admin user can add accounts through the Admin panel. If additional superusers are needed, the following command can be run (user will be prompted to set a username and password for the new superuser):
 
 ```bash
-> python3 ptp.py su
+python3 ptp.py su
 ```
 
 <a name='change-password'></a>
@@ -267,7 +289,7 @@ During set up, you will automatically be prompted to create a superuser. Once th
 The password for an existing account can be changed by running the following command (user will be prompted to set a new password for the user):
 
 ```bash
-> python3 ptp.py password -u [username]
+python3 ptp.py password -u [username]
 ```
 
 <a name='reset-attempts'></a>
@@ -277,7 +299,7 @@ The password for an existing account can be changed by running the following com
 An account will be locked out after three failed attempts to prevent brute-force password attacks. The attempt count for all accounts can be reset by running the following command:
 
 ```bash
-> python3 ptp.py reset
+python3 ptp.py reset
 ```
 
 <a name='view-logs'></a>
@@ -287,7 +309,7 @@ An account will be locked out after three failed attempts to prevent brute-force
 Logs for each container can be viewed by running the following command (be sure to specify the container associated with the logs you wish to view):
 
 ```bash
-> python3 ptp.py logs -c [db/nginx/web]
+python3 ptp.py logs -c [db/nginx/web]
 ```
 
 <a name='connect-shell'></a>
@@ -297,7 +319,7 @@ Logs for each container can be viewed by running the following command (be sure 
 To connect to a shell for a particular container, use the following command (be sure to specify the container associated with the shell you wish to connect to):
 
 ```bash
-> python3 ptp.py shell -c [db/nginx/web]
+python3 ptp.py shell -c [db/nginx/web]
 ```
 
 <a name='pause'></a>
@@ -307,7 +329,7 @@ To connect to a shell for a particular container, use the following command (be 
 To pause an instance of Reporting Engine, run the following command (be sure to back up the instance first):
 
 ```bash
-> python3 ptp.py pause
+python3 ptp.py pause
 ```
 
 <a name='resume'></a>
@@ -317,7 +339,7 @@ To pause an instance of Reporting Engine, run the following command (be sure to 
 To resume a paused instance of Reporting Engine, run the following command:
 
 ```bash
-> python3 ptp.py resume
+python3 ptp.py resume
 ```
 
 <a name='tear-down'></a>
@@ -327,7 +349,7 @@ To resume a paused instance of Reporting Engine, run the following command:
 To tear down the application, the following command can be run (***note that this will remove all containers and their data - be sure to back up RE before tearing down***):
 
 ```bash
-> python3 ptp.py remove
+python3 ptp.py remove
 ```
 
 <a name='development-guide'></a>
@@ -341,7 +363,7 @@ To tear down the application, the following command can be run (***note that thi
 Once all prerequisites and dependencies are met, a development instance of RE can be set up by mounting the code directory as a volume, allowing for live reload of most code changes in the application. A developer instance of RE can be spun up by running the following command:
 
 ```bash
-> python3 ptp.py dev -r [FAST/RPT/RVA]
+python3 ptp.py dev -r [FAST/RPT/RVA]
 ```
 
 The default assessment type of the application is set to **RVA** in cases where an assessment type is not specified.
