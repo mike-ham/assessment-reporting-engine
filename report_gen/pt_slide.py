@@ -1006,7 +1006,7 @@ def insert_services_slides(prs, asmt_info, slide_size):
             paragraph = ransomware_placeholder.paragraphs[0]
             paragraph.level = 1
             run = paragraph.add_run()
-            run.text = f"During ransomware simulation, the CISA team found that endpoints are vulnerable to {vuln} out of the {total} ransomware scenarios tested."
+            run.text = f"During ransomware simulation, the security team found that endpoints are vulnerable to {vuln} out of the {total} ransomware scenarios tested."
             paragraph.font.color.rgb = gray
 
         ransomware_results = []
@@ -1571,7 +1571,7 @@ def insert_conclusion_slides(prs, report_type, asmt_info):
         paragraph = ns_placeholder.add_paragraph()
         paragraph.level = 1
         run = paragraph.add_run()
-        run.text = "Consider future work with CISA"
+        run.text = "Consider future work with the security team"
         paragraph.font.color.rgb = gray
 
     # insert Questions slide

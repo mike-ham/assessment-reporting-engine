@@ -100,7 +100,7 @@ python3 --version
 ## Getting Started
 
 ```bash
-git clone https://github.com/asmtlab/assessment-reporting-engine.git
+git clone https://github.com/mike-ham/assessment-reporting-engine
 ```
 ```bash
 cd assessment-reporting-engine
