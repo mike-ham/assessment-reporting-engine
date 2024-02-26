@@ -356,7 +356,7 @@ python3 ptp.py resume
 To tear down the application, the following command can be run (***note that this will remove all containers and their data - be sure to back up RE before tearing down***):
 
 ```bash
-python3 ptp.py remove
+sudo python3 ptp.py remove
 ```
 
 <a name='development-guide'></a>
