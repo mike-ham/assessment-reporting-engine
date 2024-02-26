@@ -125,8 +125,15 @@ NODE_MAJOR=18
 ```bash
 echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
 ```
+Run the next command as root, don't just run it with sudo
+```bash
+sudo su
+```
 ```bash
 apt-get update && apt-get install nodejs -y && apt-get install npm -y
+```
+```bash
+exit
 ```
 
 Reboot system after installation.
@@ -151,7 +158,7 @@ apt install python3-django
 Verify `python3-django` version by running the following command:
 
 ```bash
-python3 -m django --version
+sudo python3 -m django --version
 ```
 
 #### TailwindCSS 3
@@ -159,7 +166,7 @@ python3 -m django --version
 The following command should be run from the root of the RE directory and will install TailwindCSS 3 dependencies (requires that a valid version of `npm` already be installed) - note that this installation is performed when the `python3 ptp.py setup` command is run.
 
 ```bash
-npm install -D node/dependencies/tailwindcss-3 --legacy-peer-deps
+sudo npm install -D node/dependencies/tailwindcss-3 --legacy-peer-deps
 ```
 
 #### Vue.js 3
@@ -167,7 +174,7 @@ npm install -D node/dependencies/tailwindcss-3 --legacy-peer-deps
 The following command should be run from the root of the RE directory and will install Vue.js 3 dependencies (requires that a valid version of `npm` already be installed) - note that this installation is performed when the `python3 ptp.py setup` command is run.
 
 ```bash
-npm install -D node/dependencies/components-vue3 --legacy-peer-deps
+sudo npm install -D node/dependencies/components-vue3 --legacy-peer-deps
 ```
 
 <a name='setup-production'></a>
@@ -177,13 +184,13 @@ npm install -D node/dependencies/components-vue3 --legacy-peer-deps
 The following command can be run from the root of the RE directory to install the TailwindCSS 3 and Vue.js 3 dependencies (if this has not already been done manually per the last section):
 
 ```bash
-python3 ptp.py setup
+sudo python3 ptp.py setup
 ```
 
 Once all prerequisites and dependencies are met, an instance of RE can be spun up by running the following command (be sure to specify the correct assessment type with the `-r` flag):
 
 ```bash
-python3 ptp.py run -r [FAST/RPT/RVA]
+sudo python3 ptp.py run -r [FAST/RPT/RVA]
 ```
 
 The default assessment type of the application is set to **RVA** in cases where an assessment type is not specified.
