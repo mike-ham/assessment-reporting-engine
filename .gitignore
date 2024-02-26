@@ -50,3 +50,5 @@ ptportal.log
 
 node/package-lock.json
 node/node_modules/*
+/.vs/assessment-reporting-engine/v17/.wsuo
+/.vs/assessment-reporting-engine/FileContentIndex/2b84fa9d-f09b-462c-8752-9c5eb403f699.vsidx
