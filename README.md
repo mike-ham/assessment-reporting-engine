@@ -152,7 +152,7 @@ npm --version
 The following command will install Python3-Django:
 
 ```bash
-apt install python3-django
+sudo apt install python3-django
 ```
 
 Verify `python3-django` version by running the following command:
