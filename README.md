@@ -130,7 +130,11 @@ sudo apt install python3 python3-pip
 ```
 Install Docker Compose:
 ```bash
-sudo pip3 install docker-compose
+sudo apt install docker-compose
+```
+Install apt-utils:
+```bash
+sudo apt install apt-utils
 ```
 Verify installation:
 ```bash
