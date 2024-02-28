@@ -55,6 +55,88 @@ This is a development version, so includes source code with docker images. In fu
 
 <a name='docker-engine'></a>
 
+### Installing on Kali
+
+Keep in mind that Kali I downlaoded from Offensive Security did not have docker or docker compose pre-installed.
+
+And the code in ptp.py called docker-compose commands using an alias defined of 'docker compose' so you need to make sure you have an alias define for that.
+
+Also, the newest Kali image uses the xsh shell instead of the bash shell by default and the ~/.bashrc file has errors in it regarding the shopt command.
+
+So add your alias for 'docker compose' in your ~/.zshrc file. (alias docker-compose='docker compose') or ptp.py wont run successfully.
+
+THE ONE PROBLEM I HAD ON KALI was that I could not get 'docker compose' to map to docker-compose.  (Tried many different ways)
+I ended up having to edit the ptp.py file and change all the references to 'docker compose' to 'docker-compose' and the ones that were broken into arguments like 'docker', 'compose' to 'docker-compose', ''
+But it did work and I was able to build it and ran the RPT portal.
+
+And on Kali if you want to install OpenSSH to be able to connect with Putty or some other client here are commands that worked for me:
+
+Install the SSH server (if not already installed):
+```bash
+sudo apt update
+sudo apt install openssh-server
+```
+
+Start the SSH service:
+```bash
+sudo service ssh start
+```
+or
+```bash
+sudo systemctl start ssh
+```
+
+(Optional) Enable SSH server to start on boot:
+```bash
+sudo systemctl enable ssh
+```
+
+Check SSH server status:
+Update package lists:
+```bash
+sudo service ssh status
+```
+
+To Install Docker on Kali:
+Update package lists:
+```bash
+sudo apt update
+```
+Install Docker Engine:
+```bash
+sudo apt install -y docker.io
+```
+Make Docker Start by default on startup:
+```bash
+sudo systemctl enable docker --now
+```
+Verify Docker installation:
+```bash
+sudo docker --version
+```
+(Optional) Add your user to the Docker group:
+```bash
+sudo usermod -aG docker $USER
+```
+
+To Install Docker Compose on Kali:
+Update package lists:
+```bash
+sudo apt update
+```
+Install dependencies:
+```bash
+sudo apt install python3 python3-pip
+```
+Install Docker Compose:
+```bash
+sudo pip3 install docker-compose
+```
+Verify installation:
+```bash
+docker-compose --version
+```
+
 ### Docker Engine
 
 Docker Engine (v20.10.12+) must be installed to run RE. It is recommended to install the latest version of Docker Engine.
@@ -130,7 +212,13 @@ Run the next command as root, don't just run it with sudo
 sudo su
 ```
 ```bash
-apt-get update && apt-get install nodejs -y && apt-get install npm -y
+apt-get update
+```
+```bash
+apt-get install nodejs -y 
+```
+```bash
+apt-get install npm -y
 ```
 ```bash
 exit
@@ -152,7 +240,7 @@ npm --version
 The following command will install Python3-Django:
 
 ```bash
-apt install python3-django
+sudo apt install python3-django
 ```
 
 Verify `python3-django` version by running the following command:
@@ -172,6 +260,8 @@ sudo npm install -D node/dependencies/tailwindcss-3 --legacy-peer-deps
 #### Vue.js 3
 
 The following command should be run from the root of the RE directory and will install Vue.js 3 dependencies (requires that a valid version of `npm` already be installed) - note that this installation is performed when the `python3 ptp.py setup` command is run.
+
+You only need to do this if you have not run the previous two commands.
 
 ```bash
 sudo npm install -D node/dependencies/components-vue3 --legacy-peer-deps
