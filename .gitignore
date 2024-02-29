@@ -61,3 +61,6 @@ node/node_modules/*
 /.vs/VSWorkspaceState.json
 /.vs/assessment-reporting-engine/FileContentIndex/48dcec8d-9a2d-485e-b3a1-062dd015ef46.vsidx
 /.vs/assessment-reporting-engine/FileContentIndex/938ffb53-5d2c-4ebf-8d0b-33cbd2ed62dc.vsidx
+/.vs/assessment-reporting-engine/FileContentIndex/ba290e4c-8422-41ba-bd6d-c7a11c4f288f.vsidx
+/.vs/assessment-reporting-engine/v17/workspaceFileList.bin
+*.vsidx
