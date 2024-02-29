@@ -26,6 +26,7 @@ This is a development version, so includes source code with docker images. In fu
     -   [Docker Engine](#docker-engine)
     -   [Docker Compose](#docker-compose)
     -   [Python](#python)
+-   [Installing on Kali](#installing-on-kali)
 -   [Getting Started](#getting-started)
     -   [Install Dependencies](#install-dependencies)
     -   [Setup (Production)](#setup-production)
@@ -55,19 +56,11 @@ This is a development version, so includes source code with docker images. In fu
 
 <a name='docker-engine'></a>
 
+<a name='installing-on-kali'></a>
+
 ### Installing on Kali
 
-Keep in mind that Kali I downlaoded from Offensive Security did not have docker or docker compose pre-installed.
-
-And the code in ptp.py called docker-compose commands using an alias defined of 'docker compose' so you need to make sure you have an alias define for that.
-
-Also, the newest Kali image uses the xsh shell instead of the bash shell by default and the ~/.bashrc file has errors in it regarding the shopt command.
-
-So add your alias for 'docker compose' in your ~/.zshrc file. (alias docker-compose='docker compose') or ptp.py wont run successfully.
-
-THE ONE PROBLEM I HAD ON KALI was that I could not get 'docker compose' to map to docker-compose.  (Tried many different ways)
-I ended up having to edit the ptp.py file and change all the references to 'docker compose' to 'docker-compose' and the ones that were broken into arguments like 'docker', 'compose' to 'docker-compose', ''
-But it did work and I was able to build it and ran the RPT portal.
+Keep in mind that Kali I downloaded from Offensive Security did not have docker or docker compose pre-installed.
 
 And on Kali if you want to install OpenSSH to be able to connect with Putty or some other client here are commands that worked for me:
 
@@ -119,27 +112,119 @@ sudo docker --version
 sudo usermod -aG docker $USER
 ```
 
-To Install Docker Compose on Kali:
-Update package lists:
+To Install Docker Compose V2 / docker-ce on Kali:
+docker-ce can be installed from Docker repository. One thing to bear in mind, 
+Kali Linux is based on Debian, so we need to use Debian’s current stable version 
+(even though Kali Linux is a rolling distribution). 
+At the time of editing (kali-linux-2023.3-installer-arm64.iso for the Mac), its “bookworm”:
+```bash
+printf '%s\n' "deb https://download.docker.com/linux/debian bookworm stable" |
+  sudo tee /etc/apt/sources.list.d/docker-ce.list
+```
+Import the gpg key:
+```bash
+curl -fsSL https://download.docker.com/linux/debian/gpg |
+  sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/docker-ce-archive-keyring.gpg
+```
+Install the latest version of docker-ce:
 ```bash
 sudo apt update
 ```
-Install dependencies:
 ```bash
-sudo apt install python3 python3-pip
-```
-Install Docker Compose:
-```bash
-sudo apt install docker-compose
-```
-Install apt-utils:
-```bash
-sudo apt install apt-utils
+sudo apt install -y docker-ce docker-ce-cli containerd.io
 ```
 Verify installation:
 ```bash
-docker-compose --version
+docker compose version
 ```
+
+Clone and enter Repo to continue:
+```bash
+git clone https://github.com/mike-ham/assessment-reporting-engine
+```
+```bash
+cd assessment-reporting-engine
+```
+
+Any alternate versions of Node and NPM that may be running on the system where RE is being installed could conflict with RE set up. For that reason, it is recommended to purge any existing versions of Node and NPM if they are not needed. The following command will install Node and NPM:
+
+```bash
+curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
+```
+```bash
+NODE_MAJOR=18
+```
+```bash
+echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
+```
+Run the next command as root, don't just run it with sudo
+```bash
+sudo su
+```
+```bash
+apt-get update
+```
+```bash
+apt-get install nodejs -y 
+```
+```bash
+apt-get install npm -y
+```
+```bash
+exit
+```
+
+Verify `node` and `npm` versions by running the following commands:
+
+```bash
+node --version
+```
+```bash
+npm --version
+```
+
+The following command will install Python3-Django:
+
+```bash
+sudo apt install python3-django
+```
+
+Verify `python3-django` version by running the following command:
+
+```bash
+sudo python3 -m django --version
+```
+
+#### TailwindCSS 3
+
+The following command should be run from the root of the RE directory and will install TailwindCSS 3 dependencies (requires that a valid version of `npm` already be installed) - note that this installation is performed when the `python3 ptp.py setup` command is run.
+
+```bash
+sudo npm install -D node/dependencies/tailwindcss-3 --legacy-peer-deps
+```
+
+The following command should be run from the root of the RE directory and will install Vue.js 3 dependencies (requires that a valid version of `npm` already be installed) - note that this installation is performed when the `python3 ptp.py setup` command is run.
+
+You only need to do this if you have not run the previous two commands.
+
+```bash
+sudo npm install -D node/dependencies/components-vue3 --legacy-peer-deps
+```
+
+The following command can be run from the root of the RE directory to install the TailwindCSS 3 and Vue.js 3 dependencies (if this has not already been done manually per the last section):
+
+```bash
+sudo python3 ptp.py setup
+```
+
+Once all prerequisites and dependencies are met, an instance of RE can be spun up by running the following command (be sure to specify the correct assessment type with the `-r` flag):
+
+```bash
+sudo python3 ptp.py run -r [FAST/RPT/RVA]
+```
+Done, you can not access the site at the systems's IP and login with the account you created.
+
+### Ubuntu and other Linux supported by CISA project
 
 ### Docker Engine
 
