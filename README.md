@@ -227,7 +227,7 @@ Once all prerequisites and dependencies are met, an instance of RE can be spun u
 ```bash
 sudo python3 ptp.py run -r [FAST/RPT/RVA]
 ```
-Done, you can not access the site at the systems's IP and login with the account you created.
+Done, you can now access the site at the systems's IP and login with the account you created.
 
 ### Ubuntu and other Linux supported by CISA project
 
