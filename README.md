@@ -211,6 +211,11 @@ You only need to do this if you have not run the previous two commands.
 sudo npm install -D node/dependencies/components-vue3 --legacy-peer-deps
 ```
 
+I saw a reference to this package so I install this:
+```bash
+sudo apt install apt-utils
+```
+
 The following command can be run from the root of the RE directory to install the TailwindCSS 3 and Vue.js 3 dependencies (if this has not already been done manually per the last section):
 
 ```bash
